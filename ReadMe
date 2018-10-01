@@ -3,7 +3,7 @@
             *********************************************************
 
 
-Hello, this project is a part of Udacity's Data Wrangling with MongoDB MOOC. The
+Hello, this project is a part of "Udacity's Data Wrangling with MongoDB MOOC". The
 objective is to take the data in the form of an xml file and clean the data, writing
 the required data in json format and finally storing the data in mongoDB. Following 
 are the steps involved in the completion of project -:
@@ -57,7 +57,7 @@ I've used geographical data for Benagluru city, defined by below corrdinates -:
 minlat="12.9313000" minlon="77.5072000" maxlat="13.0250000" maxlon="77.6816000"
 
 The data here is in form of an xml file comprising of several tags, and the information
-is present is the form of key and value pairs.
+is present is the form of key and value pairs. The size of data is nearly 260MB.
 
 Example -:
 
@@ -69,7 +69,7 @@ uid="2910514" user="akhilsai">
     <nd ref="3525139910"/>
     <nd ref="3525139924"/>
     <tag k="building" v="yes"/>
-  </way>
+</way>
 
 
 From the above piece of data we can see that the information is present inside the tags
@@ -87,7 +87,7 @@ as key and value pairs.
 a. What is Data Cleaning?
 
 Data cleaning is the process of detecting and correcting inaccurate records, getting rid of
-irrelevant data, as per as the requirement specifies.
+irrelevant data, as per as the requirement specified.
 
 
 -----------------------------------------------------------------------------------------------
@@ -95,7 +95,166 @@ irrelevant data, as per as the requirement specifies.
 
 b. Data processed in this project?
 
-We have several tags
+We have several tags in our data, number of occurences of which is given below -
+
+
+---------------------
+Tag         Frequency
+---------------------
+bounds          1
+member        22375
+meta            1
+nd           1407185
+node         1133336
+note            1
+osm             1
+relation       699
+tag           351122
+way           264345
+---------------------
+
+
+Out of above tags we have observed that tags contained inside elements "node" and "way"
+contain some really useful information. Here element "tag" is the child of "node" element,
+and element "nd" and "tag" is the child of "way" element.
+
+Example -:
+
+<node id="26529522" lat="12.9747225" lon="77.6200056" version="6" 
+timestamp="2016-01-31T19:21:38Z" changeset="36923602" uid="1306" user="PlaneMad">
+    <tag k="highway" v="traffic_signals"/>
+</node>
+
+<way id="346853361" version="1" timestamp="2015-05-21T11:37:31Z" changeset="31340628" 
+uid="2900596" user="harisha">
+    <nd ref="3533178738"/>
+    <nd ref="3533178702"/>
+    <nd ref="3533178701"/>
+    <nd ref="3533178736"/>
+    <nd ref="3533178738"/>
+    <tag k="building" v="yes"/>
+</way>
+
+
+From the above example we see that element "node", "way", "nd", "tag" contains several
+attributes, which give useful information, so, in this project we will only be working with
+element "node" and "way" and their children.
+
+
+-----------------------------------------------------------------------------------------------
+
+
+c. Description of the elements?
+
+"node"  -: It is a single point in a map defined by its latitude, longitude, and id.
+
+"way"   -: A way is an ordrered list of nodes.
+
+"tag"   -: This tag is usually find inside a "node" or "way" element, and it contains
+           information about that particular node, or way, such as name, type, etc.
+
+"nd"    -: This tag is found inside a "way" tag and it attributes tell about the reference
+           number by which a point is represented, example -: reference number for roads.
+
+
+
+
+***********************************************************************************************
+***********************************************************************************************
+
+
+
+## Step 3: Writing the data in JSON format
+
+a. Why JSON format?
+
+Normally we can write the clean data in a csv file, the condition being the data should be
+structured, it should have a predifined number of columns. But here we have found
+several elements, which have information not contained in other elements, for example -:
+
+A element may information about the address of a house as it represents a house, while,
+other may represent an address of an office area, and may have additional information, in such
+case we cannot use csv format.
+
+So, we have written the data in the JSON format, where we have key and value pairs, and also, 
+we can add additional information, in a single JSON element without any issue.
+
+
+The size of the final JSON file is nearly 300MB, and has 1397681 elements.
+
+Example -:
+
+{"type": "way", "id": "130361432", "created": {"version": "12", 
+"timestamp": "2018-03-31T18:30:05Z", 
+"changeset": "57696070", "uid": "1306", "user": "PlaneMad"}, 
+"alt_name": "Sadananda Nagar Water Tank road", "highway": "unclassified", 
+"name": "4th Main Road", "oneway": "no", "surface": "asphalt", 
+"node_refs": ["1436121376", "1436146514", "1436154929", "1436121385", "1436136098", 
+"1436121378", "1436121373"]}
+
+
+
+***********************************************************************************************
+***********************************************************************************************
+
+
+## Step 4: Storing the prepared data in MongoDB
+
+a. Why MongoDB?
+
+As we have already seen that our data is not structured and, so we have used MongoDB, which
+unlike traditional relational databases doesn't use columns and rows. It stores data as a 
+document in a collection. Its fast, and highly scalable.
+
+
+***********************************************************************************************
+***********************************************************************************************
+
+
+We have used several python modules in this project which are as follows -:
+
+
+1. re
+2. pymongo
+3. codecs
+4. json
+5. xml.etree.cElementTree
+
+
+
+Descriptions of the modules used is given below -:
+
+
+
+## 1. re -:
+
+This module provides regular expression matching operations.
+
+
+## 2. pymongo -:
+
+PyMongo is a Python distribution containing tools for working with MongoDB.
+
+
+## 3. codecs -:
+
+The codecs module provides stream and file interfaces for transcoding data in your program.
+
+
+## 4. json
+
+JSON module that helps converting the datastructures to JSON strings.
+
+
+## 5. xml.etree.cElementTree
+
+The cElementTree module is a C implementation of the ElementTree API, optimized for fast 
+parsing and low memory use. It is used to process hierarchical data formats such as xml.
+
+
+
+***********************************************************************************************
+***********************************************************************************************
 
 
 
