@@ -25,7 +25,7 @@ from pymongo import MongoClient       # Module to access mongoDB database
 ####--------------------------------------------------------------------------------------####
 
 
-## Below are some useful global constants
+## Below are some useful constants which have a global scope
 
 lower = re.compile(r'^([a-z]|_)*$')
 lower_colon = re.compile(r'^([a-z]|_)*:([a-z]|_)*$')
@@ -171,7 +171,7 @@ def unique_users(filename):
 
 
 ## In our XML file we have several tags, such as node, and ways, which contains attributes
-## whose value gives us some valuable informatio, also these tags have child tags, which 
+## whose value gives us some valuable information, also these tags have child tags, which 
 ## also contain useful information. We will extract that information and write it into a json
 ## file. After that we will upload the processed data in mongoDB. Below function does that.
 
@@ -311,13 +311,15 @@ def write_info(filename, pretty = False):
 ####--------------------------------------------------------------------------------------####
 ####--------------------------------------------------------------------------------------####
 
-## Now that we have written all the refined in a json file, our next task is to store that
-## data in mongoDB. For this we will use "pymongo" module of python. Below is the function
-## to do that.
+
+
+## Now that we have written all the relevant information in a json file, our next task is to 
+## store that data in mongoDB. For this we will use "pymongo" module of python. Below is the 
+## function to do that.
 
 ## Function stores the data from json file to mongoDB.
-## Input: Reads each line form the json file.
-## Output: Return nothing, stores data in a mongoDB database.
+## Input: Reads each line from the json file.
+## Output: Returns nothing, stores data in a mongoDB database.
 def store_info(filename):
 
     # Connecting to openStreetMapData database in mongoDB
