@@ -4,9 +4,9 @@
 
 
 Hello, this project is a part of "Udacity's Data Wrangling with MongoDB MOOC". The
-objective is to take the data in the form of an xml file and clean the data, writing
-the required data in json format and finally storing the data in mongoDB. Following 
-are the steps involved in the completion of project -:
+objective is to take the data which is in the form of an xml file and clean the data, 
+writing the required data in json format and finally storing the data in mongoDB. Following 
+are the steps involved in the project -:
 
 1. Getting data from Open Street Map
 2. Cleaning the data
@@ -114,8 +114,8 @@ way           264345
 ---------------------
 
 
-Out of above tags we have observed that tags contained inside elements "node" and "way"
-contain some really useful information. Here element "tag" is the child of "node" element,
+We have observed that tags contained inside elements "node" and "way" contain 
+some really useful information. Here element "tag" is the child of "node" element,
 and element "nd" and "tag" is the child of "way" element.
 
 Example -:
@@ -150,10 +150,10 @@ c. Description of the elements?
 
 "way"   -: A way is an ordrered list of nodes.
 
-"tag"   -: This tag is usually find inside a "node" or "way" element, and it contains
+"tag"   -: This tag is usually found inside a "node" or "way" element, and it contains
            information about that particular node, or way, such as name, type, etc.
 
-"nd"    -: This tag is found inside a "way" tag and it attributes tell about the reference
+"nd"    -: This tag is found inside a "way" tag and its attributes tell about the reference
            number by which a point is represented, example -: reference number for roads.
 
 
@@ -172,7 +172,7 @@ Normally we can write the clean data in a csv file, the condition being the data
 structured, it should have a predifined number of columns. But here we have found
 several elements, which have information not contained in other elements, for example -:
 
-A element may information about the address of a house as it represents a house, while,
+A element may have information about the address of a house as it represents a house, while,
 other may represent an address of an office area, and may have additional information, in such
 case we cannot use csv format.
 
@@ -202,9 +202,9 @@ Example -:
 
 a. Why MongoDB?
 
-As we have already seen that our data is not structured and, so we have used MongoDB, which
-unlike traditional relational databases doesn't use columns and rows. It stores data as a 
-document in a collection. Its fast, and highly scalable.
+As we have already seen that our data is not structured and, so it makes sense to use MongoDB 
+here, which unlike traditional relational databases doesn't use columns and rows. It stores 
+data as a document in a collection. Its fast, and highly scalable.
 
 
 ***********************************************************************************************
@@ -222,7 +222,7 @@ We have used several python modules in this project which are as follows -:
 
 
 
-Descriptions of the modules used is given below -:
+Description of the modules used is given below -:
 
 
 
@@ -238,7 +238,7 @@ PyMongo is a Python distribution containing tools for working with MongoDB.
 
 ## 3. codecs -:
 
-The codecs module provides stream and file interfaces for transcoding data in your program.
+The codecs module provides stream and file interfaces for transcoding data in the program.
 
 
 ## 4. json
